@@ -3,16 +3,20 @@ import random
 import time
 
 def quick_sort(arr):
+    # Base case: if the array has 0 or 1 elements, it's already sorted
     if len(arr) <= 1:
         return arr
-    else:
-        # Elegir el pivote (en este caso, el último elemento)
-        pivot = arr[-1]
-        # Dividir el arreglo en dos subarreglos: menores y mayores al pivote
-        less_than_pivot = [x for x in arr[:-1] if x <= pivot]
-        greater_than_pivot = [x for x in arr[:-1] if x > pivot]
-        # Ordenar recursivamente y combinar
-        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
+    
+    # Choose a random pivot for better performance
+    pivot = random.choice(arr)
+    
+    # Partition the array into three subarrays
+    less_than_pivot = [x for x in arr if x < pivot]
+    equal_to_pivot = [x for x in arr if x == pivot]
+    greater_than_pivot = [x for x in arr if x > pivot]
+    
+    # Recursively sort the subarrays and combine them
+    return quick_sort(less_than_pivot) + equal_to_pivot + quick_sort(greater_than_pivot)
 
 def main():
     # Solicitar el número de elementos
